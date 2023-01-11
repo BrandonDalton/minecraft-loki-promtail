@@ -1,0 +1,34 @@
+version: "3"
+services:
+  grafana:
+    container_name: grafana
+    image: grafana/grafana-oss:latest
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+  loki:
+    image: grafana/loki:latest
+    hostname: loki
+    container_name: loki
+    volumes:
+    - loki:/etc/loki
+    ports:
+     - "3100:3100" # optional
+    restart: unless-stopped
+    user: 1000:1000
+    command: -config.file=/etc/loki/loki-config.yml  
+    restart: unless-stopped
+  promtail:
+    image: grafana/promtail:latest
+    container_name: promtail
+    depends_on:
+      - loki
+    hostname: promtail
+    volumes:
+      - promtail:/etc/promtail
+      - mc:/var/log/minecraft #Location of Minecraft Logs
+    restart: unless-stopped
+    command: -config.file=/etc/promtail/promtail-config.yml
+volumes:
+  loki:
+  promtail:
