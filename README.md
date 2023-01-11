@@ -1,1 +1,1 @@
-# minecraft-loki-promtail
+# minecraft-loki-promtail-docker
