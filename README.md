@@ -1,4 +1,4 @@
-# minecraft-loki-promtail-docker
+# Minecraft Loki Promtail Docker
 
 ## Docker Setup
 
